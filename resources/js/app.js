@@ -6,6 +6,11 @@ import { createInertiaApp } from "@inertiajs/vue3";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { ZiggyVue } from "../../vendor/tightenco/ziggy/dist/vue.m";
 
+// toast
+
+import Vue3Toasity from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
+
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Laravel";
 
@@ -22,6 +27,7 @@ createInertiaApp({
             .use(ZiggyVue, Ziggy)
             .component("Head", Head)
             .component("Link", Link)
+            .use(Vue3Toasity)
             .mount(el);
     },
     progress: {

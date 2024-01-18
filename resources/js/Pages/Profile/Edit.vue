@@ -7,12 +7,8 @@ import ProfileContent from "@/Pages/Profile/Partials/ProfileContent.vue";
 import UpdateProfileInformationForm from "@/Pages/Profile/Partials/UpdateProfileInformationForm.vue";
 import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm.vue";
 
-import { useForm, usePage } from "@inertiajs/vue3";
-
 import { ref } from "vue";
-const open = ref(true);
 const switchbtn = ref(false);
-const user = usePage().props.auth.user;
 </script>
 <template>
     <AdminLayout>
@@ -55,9 +51,11 @@ const user = usePage().props.auth.user;
                 <template v-if="switchbtn == false">
                     <ProfileContent></ProfileContent>
                 </template>
+
                 <template v-if="switchbtn == true">
                     <UpdateProfileInformationForm></UpdateProfileInformationForm>
                 </template>
+
                 <template v-if="switchbtn == true">
                     <UpdatePasswordForm> </UpdatePasswordForm>
                 </template>
