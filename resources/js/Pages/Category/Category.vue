@@ -8,6 +8,8 @@ const props = defineProps({
     filter: String,
     category: Object,
 });
+
+
 </script>
 <template>
     <AdminLayout>
