@@ -10,7 +10,7 @@
             </div>
             <div class="text-2xl font-semibold capitalize">
                 <InputLabel>Phone number :</InputLabel>
-                {{ user.phone }}
+                {{ user.phone_number }}
             </div>
             <div class="text-2xl font-semibold capitalize">
                 <InputLabel>Address :</InputLabel>

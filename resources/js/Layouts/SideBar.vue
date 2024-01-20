@@ -44,6 +44,16 @@
                         </svg>
                     </template>
                 </SideBarButton>
+                <SideBarButton
+                    label="category"
+                    :href="route('category.index')"
+                    :class="{
+                        'bg-primary-100 dark:bg-primary':
+                            route().current('category.index'),
+                    }"
+                >
+                    <template #icon> </template>
+                </SideBarButton>
 
                 <!-- Add more Dropdown components as needed -->
                 <Dropdown label="Another Dropdown">

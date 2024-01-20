@@ -38,9 +38,32 @@
                 </div>
                 <div>
                     <InputLabel id="phone_number">Phone Number :</InputLabel>
+                    <TextInput
+                        id="phone"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.phone_number"
+                        required
+                        autocomplete="username"
+                        placeholder="Enter Your Phone Number"
+                    />
+                    <InputError
+                        class="mt-2"
+                        :message="form.errors.phone_number"
+                    />
                 </div>
                 <div>
                     <InputLabel id="address">Address :</InputLabel>
+                    <TextInput
+                        id="address"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.address"
+                        required
+                        autocomplete="username"
+                        placeholder="Enter Your Address"
+                    />
+                    <InputError class="mt-2" :message="form.errors.address" />
                 </div>
                 <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
             </div>
@@ -62,6 +85,8 @@ const user = usePage().props.auth.user;
 const form = useForm({
     name: user.name,
     email: user.email,
+    phone_number: user.phone_number,
+    address: user.address,
 });
 
 watch(
