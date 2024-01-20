@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryAddRequest;
 use App\Models\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -13,11 +16,24 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $category = Category::all();
-        return Inertia::render("Category/Category", compact('category'));
+        $category = Category::query()
+            ->when($request->input('search'), function ($query, $search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('status', 'like', '%' . $search . '%');
+            })
+            ->orderByDesc('id')
+            ->paginate(10)
+            ->withQueryString();
+
+        $filter = $request->input('search');
+
+        return Inertia::render("Category/Category", compact('category', 'filter'));
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -35,10 +51,12 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryAddRequest $request)
     {
-        //
+        Category::create($request->validated());
+        return redirect()->route('category.index');
     }
+
 
     /**
      * Display the specified resource.

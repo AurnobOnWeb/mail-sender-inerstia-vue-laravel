@@ -1,13 +1,13 @@
 <template>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
         <div
-            class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-light dark:bg-dark"
+            class="flex items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 bg-light dark:bg-dark px-2 py-6"
         >
-            <div>
-                <!-- Dropdown menu -->
+            <div class="flex lg:gap-4">
+                <slot name="header"></slot>
             </div>
             <label for="table-search" class="sr-only">Search</label>
-            <div class="relative py-4 px-2">
+            <div class="relative">
                 <div
                     class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-4 pointer-events-none"
                 >
@@ -44,6 +44,9 @@
                 <slot name="tbody"></slot>
             </tbody>
         </table>
+        <div class="flex justify-end my-4 md:px-2">
+            <slot name="paginator"></slot>
+        </div>
     </div>
 </template>
 

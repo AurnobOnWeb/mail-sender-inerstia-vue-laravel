@@ -65,7 +65,9 @@
                     />
                     <InputError class="mt-2" :message="form.errors.address" />
                 </div>
-                <PrimaryButton :disabled="form.processing">Save</PrimaryButton>
+                <PrimaryButton :disabled="form.processing" class="w-[10rem]"
+                    >Save</PrimaryButton
+                >
             </div>
         </div>
     </form>
