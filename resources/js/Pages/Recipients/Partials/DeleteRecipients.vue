@@ -20,10 +20,10 @@
     </PrimaryButton>
     <Modal :show="AddModal" @close="closeModal" max-width="md">
         <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900">
+            <h2 class="font-medium text-gray-900">
                 Are You Sure To Delete
                 <span class="text-red-600">"{{ name }}"</span>
-                Category ?
+                Recipients ?
             </h2>
             <div class="mt-6 flex justify-end">
                 <PrimaryButton @click="closeModal"> Cancel </PrimaryButton>
@@ -32,7 +32,7 @@
                     class="ml-3 bg-red-600"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
-                    @click="deleteCategory(id)"
+                    @click="deleteData(id)"
                 >
                     Delete
                 </PrimaryButton>
@@ -54,8 +54,8 @@ defineProps({
 });
 // delete query
 const form = useForm([]);
-const deleteCategory = (id) => {
-    form.delete(route("category.destroy", id), {
+const deleteData = (id) => {
+    form.delete(route("recipients.destroy", id), {
         preserveScroll: true,
         onSuccess: () => {
             notify();

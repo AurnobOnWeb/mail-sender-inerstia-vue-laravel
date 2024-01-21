@@ -9,11 +9,11 @@
 
     <Modal :show="AddModal" @close="closeModal">
         <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900">Add Categories</h2>
+            <h2 class="text-lg font-medium text-gray-900">Add Recipients</h2>
 
             <div class="mt-6">
                 <InputLabel for="category" value="Category" class="sr-only"
-                    >Category</InputLabel
+                    >Recipients</InputLabel
                 >
 
                 <TextInput

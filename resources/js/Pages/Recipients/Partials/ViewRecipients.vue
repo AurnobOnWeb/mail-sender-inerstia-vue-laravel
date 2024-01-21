@@ -1,7 +1,7 @@
 <template>
     <DataTable>
         <template #header>
-            <!-- <AddCategory> </AddCategory> -->
+            <AddRecipients> </AddRecipients>
         </template>
         <template #search-input>
             <input
@@ -47,13 +47,13 @@
                         :id="items.id"
                         :name="items.name"
                         :status="items.status"
-                    >
+                    > 
                     </EditCategory>
-                    <DeleteCategory
+                    -->
+                    <DeleteRecipients
                         :id="items.id"
                         :name="items.name"
-                    ></DeleteCategory> -->
-                    xxxxxxxx
+                    ></DeleteRecipients>
                 </td>
             </tr>
         </template>
@@ -64,12 +64,12 @@
 </template>
 
 <script setup>
-import AddCategory from "@/Pages/Category/Partials/AddCategory.vue";
+import AddRecipients from "@/Pages/Recipients/Partials/AddRecipients.vue";
 import DataTable from "@/Components/admin/DataTable.vue";
 import Paginator from "@/Components/admin/Paginator.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
-import DeleteCategory from "./DeleteCategory.vue";
+import DeleteRecipients from "./DeleteRecipients.vue";
 import EditCategory from "./EditCategory.vue";
 
 const props = defineProps({

@@ -19,7 +19,12 @@ class RecipentsController extends Controller
         $recipients = Recipents::with('category')
             ->when($request->input('search'), function ($query, $search) {
                 $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('status', 'like', '%' . $search . '%');
+                    ->orWhere('email', 'like', '%' . $search . '%')
+                    ->orWhere('phone_number', 'like', '%' . $search . '%')
+                    ->orWhere('address', 'like', '%' . $search . '%')
+                    ->orWhereHas('category', function ($categoryQuery) use ($search) {
+                        $categoryQuery->where('name', 'like', '%' . $search . '%');
+                    });
             })
             ->orderByDesc('id')
             ->paginate(10)
@@ -29,6 +34,7 @@ class RecipentsController extends Controller
 
         return Inertia::render("Recipients/Recipients", compact('recipients', 'filter'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -93,6 +99,8 @@ class RecipentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $recipients = Recipents::find($id);
+        $recipients->delete();
+        return redirect()->route('recipients.index');
     }
 }
