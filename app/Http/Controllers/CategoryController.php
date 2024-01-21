@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryAddRequest;
+use App\Http\Requests\updateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -75,9 +76,13 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(updateCategoryRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->validated());
+
+        return redirect()->route('category.index');
     }
 
     /**
@@ -87,10 +92,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(updateCategoryRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update($request->validated());
+
+        return redirect()->route('category.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

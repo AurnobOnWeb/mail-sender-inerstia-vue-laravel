@@ -47,22 +47,13 @@
                 >
 
                 <Selectbox
+                    :options="selectOptions"
                     v-model="form.status"
-                    ref="status"
-                    id="status"
-                    class="mt-1 block w-3/4"
-                    label="Select Category Status"
-                >
-                    <option value="Active" :selected="form.status == 'Active'">
-                        Active
-                    </option>
-                    <option
-                        value="Inactive"
-                        :selected="form.status == 'Inactive'"
-                    >
-                        Inactive
-                    </option>
-                </Selectbox>
+                    :valueOfSelect="form.status"
+                />
+
+                {{ form.status }}
+                {{ form.name }}
                 <InputError :message="form.errors.status" class="mt-2" />
             </div>
 
@@ -75,7 +66,7 @@
                     class="ml-3"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
-                    @click="addCategory"
+                    @click="addCategory()"
                 >
                     Save
                 </PrimaryButton>
@@ -114,13 +105,15 @@ const form = useForm({
 });
 
 const addCategory = () => {
-    form.post(route("category.store"), {
+    form.patch(route("category.update", props.id), {
         preserveScroll: true,
         onSuccess: () => {
             notify();
             closeModal();
         },
-        onError: () => categoryInput.value.focus(),
+        onError: () => {
+            categoryInput.value.focus();
+        },
         onFinish: () => form.reset(),
     });
 };
@@ -132,10 +125,17 @@ const closeModal = () => {
 };
 
 const notify = () => {
-    toast.success("Successfully Category Added !", {
+    toast.success("Successfully Category Updated !", {
         theme: "colored",
         autoClose: 3000,
         position: toast.POSITION.TOP_RIGHT,
     });
 };
+
+//select options
+const selectOptions = [
+    { label: "Select a Category", value: "" },
+    { label: "Active", value: "Active" },
+    { label: "Inactive", value: "Inactive" },
+];
 </script>
