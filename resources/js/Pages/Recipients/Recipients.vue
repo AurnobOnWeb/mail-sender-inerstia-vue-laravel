@@ -7,6 +7,7 @@ import ViewRecipients from "@/Pages/Recipients/Partials/ViewRecipients.vue";
 const props = defineProps({
     filter: String,
     recipients: Object,
+    categorylist: Array,
 });
 </script>
 <template>
@@ -27,6 +28,7 @@ const props = defineProps({
                 <ViewRecipients
                     :recipients="props.recipients"
                     :filter="props.filter"
+                    :categorylist="categorylist"
                 ></ViewRecipients>
                 <!-- table -->
             </div>

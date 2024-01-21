@@ -52,8 +52,6 @@
                     :valueOfSelect="form.status"
                 />
 
-                {{ form.status }}
-                {{ form.name }}
                 <InputError :message="form.errors.status" class="mt-2" />
             </div>
 

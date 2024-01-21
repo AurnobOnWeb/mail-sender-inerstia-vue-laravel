@@ -1,7 +1,7 @@
 <template>
     <DataTable>
         <template #header>
-            <AddRecipients> </AddRecipients>
+            <AddRecipients :categorylist="categorylist"> </AddRecipients>
         </template>
         <template #search-input>
             <input
@@ -43,13 +43,17 @@
                     {{ items.status }}
                 </td>
                 <td class="px-6 py-4 flex gap-2 justify-center">
-                    <!-- <EditCategory
+                    <EditRecipients
                         :id="items.id"
                         :name="items.name"
+                        :email="items.email"
+                        :phone_number="items.phone_number"
+                        :address="items.address"
                         :status="items.status"
-                    > 
-                    </EditCategory>
-                    -->
+                        :categorylist="categorylist"
+                    >
+                    </EditRecipients>
+
                     <DeleteRecipients
                         :id="items.id"
                         :name="items.name"
@@ -70,11 +74,12 @@ import Paginator from "@/Components/admin/Paginator.vue";
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import DeleteRecipients from "./DeleteRecipients.vue";
-import EditCategory from "./EditCategory.vue";
+import EditRecipients from "./EditRecipients.vue";
 
 const props = defineProps({
     filter: String,
     recipients: Object,
+    categorylist: Array,
 });
 
 // search query

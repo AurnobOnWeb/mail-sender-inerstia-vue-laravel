@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddReceipientsRequest;
+use App\Models\Category;
 use App\Models\Recipents;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -32,7 +34,9 @@ class RecipentsController extends Controller
 
         $filter = $request->input('search');
 
-        return Inertia::render("Recipients/Recipients", compact('recipients', 'filter'));
+
+        $categorylist = Category::where('status', '=', 'Active')->get();
+        return Inertia::render("Recipients/Recipients", compact('recipients', 'filter', 'categorylist'));
     }
 
 
@@ -52,9 +56,10 @@ class RecipentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AddReceipientsRequest $request)
     {
-        //
+        Recipents::create($request->validated());
+        return redirect()->route('recipients.index');
     }
 
     /**

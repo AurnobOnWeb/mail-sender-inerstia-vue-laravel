@@ -23,40 +23,77 @@
     <Modal :show="AddModal" @close="closeModal">
         <div class="p-6">
             <h2 class="text-lg font-medium text-gray-900">Update Category</h2>
-
             <div class="mt-6">
-                <InputLabel for="category" value="Category" class="sr-only"
-                    >Category</InputLabel
-                >
-
                 <TextInput
-                    id="category"
-                    ref="categoryInput"
+                    id="RecipientsName"
+                    ref="RecipientsNameInput"
                     v-model="form.name"
                     type="text"
                     class="mt-1 block w-3/4"
-                    placeholder="Enter Category Name"
-                    @keyup.enter="addCategory"
+                    placeholder="Enter Recipients Name"
                 />
 
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
             <div class="mt-6">
-                <InputLabel for="status" value="status" class="sr-only"
-                    >Status</InputLabel
-                >
-
-                <Selectbox
-                    :options="selectOptions"
-                    v-model="form.status"
-                    :valueOfSelect="form.status"
+                <TextInput
+                    id="RecipientsEmail"
+                    v-model="form.email"
+                    type="email"
+                    class="mt-1 block w-3/4"
+                    placeholder="Enter Recipients Email"
                 />
 
-                {{ form.status }}
-                {{ form.name }}
-                <InputError :message="form.errors.status" class="mt-2" />
+                <InputError :message="form.errors.email" class="mt-2" />
             </div>
+            <div class="mt-6">
+                <TextInput
+                    id="description"
+                    v-model="form.description"
+                    type="text"
+                    class="mt-1 block w-3/4"
+                    placeholder="Enter Recipients Description"
+                />
 
+                <InputError :message="form.errors.description" class="mt-2" />
+            </div>
+            <div class="mt-6">
+                <TextInput
+                    id="phone"
+                    v-model="form.phone_number"
+                    type="text"
+                    class="mt-1 block w-3/4"
+                    placeholder="Enter Recipients Phone Number"
+                />
+
+                <InputError :message="form.errors.phone_number" class="mt-2" />
+            </div>
+            <div class="mt-6">
+                <TextInput
+                    id="Address"
+                    v-model="form.address"
+                    type="text"
+                    class="mt-1 block w-3/4"
+                    placeholder="Enter Recipients Phone Address"
+                />
+
+                <InputError :message="form.errors.address" class="mt-2" />
+            </div>
+            <div class="mt-6">
+                <select
+                    id="Category"
+                    class="bg-light border border-primary text-dark mb-6 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-primary dark:border-primary dark:placeholder-primary dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                    v-model="form.category_id"
+                >
+                    <option value="" selected>Select Category</option>
+
+                    <template v-for="item in categorylist" :key="item.id">
+                        <option :value="item.id">{{ item.name }}</option>
+                    </template>
+                </select>
+
+                <InputError :message="form.errors.category_id" class="mt-2" />
+            </div>
             <div class="mt-6 flex justify-end">
                 <PrimaryButton @click="closeModal" class="bg-red-600">
                     Cancel
@@ -84,7 +121,6 @@ import TextInput from "@/Components/admin/TextInput.vue";
 import { nextTick, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
-import Selectbox from "@/Components/admin/Selectbox.vue";
 const props = defineProps({
     id: Number,
     name: String,
