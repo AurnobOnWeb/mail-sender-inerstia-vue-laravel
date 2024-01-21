@@ -68,7 +68,7 @@ const categoryInput = ref(null);
 
 const form = useForm({
     name: "",
-    status: "Inactive",
+    status: "Active",
 });
 
 const addCategory = () => {

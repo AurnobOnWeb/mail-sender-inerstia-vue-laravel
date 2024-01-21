@@ -22,7 +22,7 @@
 
     <Modal :show="AddModal" @close="closeModal">
         <div class="p-6">
-            <h2 class="text-lg font-medium text-gray-900">Add Categories</h2>
+            <h2 class="text-lg font-medium text-gray-900">Update Category</h2>
 
             <div class="mt-6">
                 <InputLabel for="category" value="Category" class="sr-only"
@@ -40,6 +40,30 @@
                 />
 
                 <InputError :message="form.errors.name" class="mt-2" />
+            </div>
+            <div class="mt-6">
+                <InputLabel for="status" value="status" class="sr-only"
+                    >Status</InputLabel
+                >
+
+                <Selectbox
+                    v-model="form.status"
+                    ref="status"
+                    id="status"
+                    class="mt-1 block w-3/4"
+                    label="Select Category Status"
+                >
+                    <option value="Active" :selected="form.status == 'Active'">
+                        Active
+                    </option>
+                    <option
+                        value="Inactive"
+                        :selected="form.status == 'Inactive'"
+                    >
+                        Inactive
+                    </option>
+                </Selectbox>
+                <InputError :message="form.errors.status" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">
@@ -69,6 +93,7 @@ import TextInput from "@/Components/admin/TextInput.vue";
 import { nextTick, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
+import Selectbox from "@/Components/admin/Selectbox.vue";
 const props = defineProps({
     id: Number,
     name: String,
