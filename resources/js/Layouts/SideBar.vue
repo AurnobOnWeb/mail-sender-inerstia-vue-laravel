@@ -54,6 +54,16 @@
                 >
                     <template #icon> </template>
                 </SideBarButton>
+                <SideBarButton
+                    label="Recipients"
+                    :href="route('recipients.index')"
+                    :class="{
+                        'bg-primary-100 dark:bg-primary':
+                            route().current('recipients.index'),
+                    }"
+                >
+                    <template #icon> </template>
+                </SideBarButton>
 
                 <!-- Add more Dropdown components as needed -->
                 <Dropdown label="Another Dropdown">

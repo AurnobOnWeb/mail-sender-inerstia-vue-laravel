@@ -17,4 +17,9 @@ class Recipents extends Model
         'category_id',
         'description'
     ];
+
+    public function category()
+    {
+        return $this->hasMany('App\Models\category', 'id', 'category_id');
+    }
 }
