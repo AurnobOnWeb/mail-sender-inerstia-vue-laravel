@@ -15,6 +15,7 @@
         <template #table-head>
             <th scope="col" class="px-6 py-3">Recipients Name</th>
             <th scope="col" class="px-6 py-3">Email</th>
+            <th scope="col" class="px-6 py-3">description</th>
             <th scope="col" class="px-6 py-3">Phone</th>
             <th scope="col" class="px-6 py-3">Address</th>
             <th scope="col" class="px-6 py-3">Category Name</th>
@@ -29,6 +30,8 @@
             >
                 <td class="px-6 py-4">{{ items.name }}</td>
                 <td class="px-6 py-4">{{ items.email }}</td>
+                <td class="px-6 py-4">{{ items.description }}</td>
+
                 <td class="px-6 py-4">{{ items.phone_number }}</td>
                 <td class="px-6 py-4">{{ items.address }}</td>
                 <td class="px-6 py-4">
@@ -47,9 +50,11 @@
                         :id="items.id"
                         :name="items.name"
                         :email="items.email"
+                        :description="items.description"
                         :phone_number="items.phone_number"
                         :address="items.address"
                         :status="items.status"
+                        :category_id="items.category_id"
                         :categorylist="categorylist"
                     >
                     </EditRecipients>

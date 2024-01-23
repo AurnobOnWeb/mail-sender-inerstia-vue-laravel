@@ -46,12 +46,21 @@
                     >Status</InputLabel
                 >
 
-                <Selectbox
-                    :options="selectOptions"
+                <select
+                    class="bg-light border border-primary text-dark mb-6 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-primary dark:border-primary dark:placeholder-primary dark:text-white dark:focus:ring-primary dark:focus:border-primary"
                     v-model="form.status"
-                    :valueOfSelect="form.status"
-                />
-
+                >
+                    <option value="">Select Status</option>
+                    <option value="Active" :selected="form.status == 'Active'">
+                        Active
+                    </option>
+                    <option
+                        value="Inactive"
+                        :selected="form.status == 'Inactive'"
+                    >
+                        Inactive
+                    </option>
+                </select>
                 <InputError :message="form.errors.status" class="mt-2" />
             </div>
 
@@ -82,7 +91,6 @@ import TextInput from "@/Components/admin/TextInput.vue";
 import { nextTick, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { toast } from "vue3-toastify";
-import Selectbox from "@/Components/admin/Selectbox.vue";
 const props = defineProps({
     id: Number,
     name: String,
@@ -129,11 +137,4 @@ const notify = () => {
         position: toast.POSITION.TOP_RIGHT,
     });
 };
-
-//select options
-const selectOptions = [
-    { label: "Select a Category", value: "" },
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" },
-];
 </script>

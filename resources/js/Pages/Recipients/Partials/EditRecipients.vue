@@ -94,6 +94,28 @@
 
                 <InputError :message="form.errors.category_id" class="mt-2" />
             </div>
+            <div class="mt-6">
+                <InputLabel for="status" value="status" class="sr-only"
+                    >Status</InputLabel
+                >
+
+                <select
+                    class="bg-light border border-primary text-dark mb-6 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5 dark:bg-primary dark:border-primary dark:placeholder-primary dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+                    v-model="form.status"
+                >
+                    <option value="">Select Status</option>
+                    <option value="Active" :selected="form.status == 'Active'">
+                        Active
+                    </option>
+                    <option
+                        value="Inactive"
+                        :selected="form.status == 'Inactive'"
+                    >
+                        Inactive
+                    </option>
+                </select>
+                <InputError :message="form.errors.status" class="mt-2" />
+            </div>
             <div class="mt-6 flex justify-end">
                 <PrimaryButton @click="closeModal" class="bg-red-600">
                     Cancel
@@ -124,31 +146,42 @@ import { toast } from "vue3-toastify";
 const props = defineProps({
     id: Number,
     name: String,
+    description: String,
     status: String,
+    email: String,
+    phone_number: Number,
+    address: String,
+    category_id: Number,
+    categorylist: Array,
 });
 const AddModal = ref(false);
 
 const openModal = () => {
     AddModal.value = true;
-    nextTick(() => categoryInput.value.focus());
+    nextTick(() => RecipientsNameInput.value.focus());
 };
 
-const categoryInput = ref(null);
+const RecipientsNameInput = ref(null);
 
 const form = useForm({
     name: props.name,
+    email: props.email,
+    description: props.description,
+    phone_number: props.phone_number,
+    address: props.address,
+    category_id: props.category_id,
     status: props.status,
 });
 
 const addCategory = () => {
-    form.patch(route("category.update", props.id), {
+    form.patch(route("recipients.update", props.id), {
         preserveScroll: true,
         onSuccess: () => {
             notify();
             closeModal();
         },
         onError: () => {
-            categoryInput.value.focus();
+            RecipientsNameInput.value.focus();
         },
         onFinish: () => form.reset(),
     });
@@ -161,17 +194,10 @@ const closeModal = () => {
 };
 
 const notify = () => {
-    toast.success("Successfully Category Updated !", {
+    toast.success("Successfully Recipients Updated !", {
         theme: "colored",
         autoClose: 3000,
         position: toast.POSITION.TOP_RIGHT,
     });
 };
-
-//select options
-const selectOptions = [
-    { label: "Select a Category", value: "" },
-    { label: "Active", value: "Active" },
-    { label: "Inactive", value: "Inactive" },
-];
 </script>

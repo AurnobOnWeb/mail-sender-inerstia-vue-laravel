@@ -91,9 +91,13 @@ class RecipentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AddReceipientsRequest $request, $id)
     {
-        //
+        $recipients = Recipents::findOrFail($id);
+
+        $recipients->update($request->validated());
+
+        return redirect()->route('recipients.index');
     }
 
     /**
