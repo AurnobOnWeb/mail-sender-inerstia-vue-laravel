@@ -2,6 +2,8 @@
     <DataTable>
         <template #header>
             <AddRecipients :categorylist="categorylist"> </AddRecipients>
+            <span class="mx-2"></span>
+            <RecipientsCsvImport > </RecipientsCsvImport>
         </template>
         <template #search-input>
             <input
@@ -80,6 +82,7 @@ import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 import DeleteRecipients from "./DeleteRecipients.vue";
 import EditRecipients from "./EditRecipients.vue";
+import RecipientsCsvImport from "./RecipientsCsvImport.vue";
 
 const props = defineProps({
     filter: String,

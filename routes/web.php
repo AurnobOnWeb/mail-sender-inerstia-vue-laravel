@@ -3,6 +3,10 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipentsController;
+use App\Http\Controllers\RecipientsCSVDATA;
+use App\Http\Controllers\SendMails;
+use App\Models\Recipents;
+use App\Notifications\RecipientsMail;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,6 +41,30 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // send mails
+    Route::get('/send-mail', [SendMails::class, 'index'])->name('send.mail');
+    Route::post('/send-mail', [SendMails::class, 'store'])->name('send.mail.store');
+
+    Route::delete('/send-mail/{id}', [SendMails::class, 'destroy'])->name('send.mail.delete');
+
+
+
+    //Sending Notifications
+
+    Route::get('/send-notify', function () {
+        // $user = Recipents::find(1);
+        // $user->notify(new RecipientsMail());
+        $users = Recipents::all();
+        foreach ($users as $user) {
+            $user->notify(new RecipientsMail());
+        }
+    })->name('sendmail');
+
+
+    // Route::post('/recipients/csvimport/{csv}', [RecipientsCSVDATA::class, 'store'])->name('recipients.csvimport');
+    // Route::post('/upload', [RecipientsCSVDATA::class, 'upload'])->name('recipients.upload.file');
 });
 
 require __DIR__ . '/auth.php';

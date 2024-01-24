@@ -64,6 +64,16 @@
                 >
                     <template #icon> </template>
                 </SideBarButton>
+                <SideBarButton
+                    label="Send mail"
+                    :href="route('send.mail')"
+                    :class="{
+                        'bg-primary-100 dark:bg-primary':
+                            route().current('send.mail'),
+                    }"
+                >
+                    <template #icon> </template>
+                </SideBarButton>
 
                 <!-- Add more Dropdown components as needed -->
                 <Dropdown label="Another Dropdown">
