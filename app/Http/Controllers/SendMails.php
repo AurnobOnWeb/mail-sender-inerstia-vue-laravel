@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MailRequest;
 use App\Models\Category;
+use App\Models\Recipents;
 use App\Models\sendmails as ModelsSendmails;
+use App\Notifications\RecipientsMail;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -30,9 +32,24 @@ class SendMails extends Controller
     }
     public function store(MailRequest $request)
     {
-        ModelsSendmails::create($request->validated());
+
+        $newMail = ModelsSendmails::create($request->validated());
+
+        // Retrieve recipients based on the given category_id
+        $recipients = Recipents::where('category_id', $request->category_id)->get();
+
+        $mail_subject = $request->mail_subject;
+        $mail_body = $request->mail_body;
+
+        // Notify each recipient using the RecipientsMail notification
+        foreach ($recipients as $recipient) {
+            $recipient->notify(new RecipientsMail($mail_subject, $mail_body));
+        }
+
+        // Redirect to the specified route after storing and notifying
         return redirect()->route('send.mail');
     }
+
     public function destroy($id)
     {
         $recipients = ModelsSendmails::find($id);

@@ -41,14 +41,11 @@
             </div>
 
             <div class="mt-6">
-                <TextInput
+                <ckeditor
+                    :editor="editor"
                     v-model="form.mail_body"
-                    type="text"
-                    class="mt-1 block w-3/4"
-                    placeholder="Enter Mail Body"
-                />
-
-                <InputError :message="form.errors.mail_body" class="mt-2" />
+                    :config="editorConfig"
+                ></ckeditor>
             </div>
             <div class="mt-6 flex justify-end">
                 <PrimaryButton @click="closeModal" class="bg-red-600">
@@ -68,6 +65,22 @@
     >
 </template>
 
+<script>
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
+export default {
+    name: "app",
+    data() {
+        return {
+            editor: ClassicEditor,
+            editorData: "<p>Content of the editor.</p>",
+            editorConfig: {
+                // The configuration of the editor.
+            },
+        };
+    },
+};
+</script>
 <script setup>
 import PrimaryButton from "@/Components/admin/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";

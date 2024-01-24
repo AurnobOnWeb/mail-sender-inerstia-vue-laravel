@@ -53,14 +53,14 @@ Route::middleware('auth')->group(function () {
 
     //Sending Notifications
 
-    Route::get('/send-notify', function () {
-        // $user = Recipents::find(1);
-        // $user->notify(new RecipientsMail());
-        $users = Recipents::all();
-        foreach ($users as $user) {
-            $user->notify(new RecipientsMail());
-        }
-    })->name('sendmail');
+    // Route::get('/send-notify', function () {
+    //     // $user = Recipents::find(1);
+    //     // $user->notify(new RecipientsMail());
+    //     $users = Recipents::all();
+    //     foreach ($users as $user) {  
+    //         $user->notify(new RecipientsMail());
+    //     }
+    // })->name('sendmail');
 
 
     // Route::post('/recipients/csvimport/{csv}', [RecipientsCSVDATA::class, 'store'])->name('recipients.csvimport');
