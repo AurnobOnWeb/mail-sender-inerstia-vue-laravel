@@ -33,7 +33,7 @@
                     ref="mailsubjectInput"
                     v-model="form.mail_subject"
                     type="text"
-                    class="mt-1 block w-3/4"
+                    class="mt-1 block"
                     placeholder="Enter Mail Subject"
                 />
 

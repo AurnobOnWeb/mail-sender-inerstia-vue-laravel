@@ -25,7 +25,12 @@
                 :key="items.id"
             >
                 <td class="px-6 py-4">{{ items.mail_subject }}</td>
-                <td class="px-6 py-4" v-html="items.mail_body"></td>
+                <td class="px-6 py-4 flex justify-center">
+                    <ViewMailBody
+                        :id="items.id"
+                        :mail_body="items.mail_body"
+                    ></ViewMailBody>
+                </td>
 
                 <td class="px-6 py-4">
                     <template v-for="item in items.category" :key="item.id">
@@ -52,6 +57,7 @@ import DataTable from "@/Components/admin/DataTable.vue";
 import Paginator from "@/Components/admin/Paginator.vue";
 import DeleteMails from "@/Pages/sendMails/Partials/DeleteMails.vue";
 import MailNow from "@/Pages/sendMails/Partials/MailNow.vue";
+import ViewMailBody from "@/Pages/sendMails/Partials/ViewMailBody.vue";
 
 import { ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";

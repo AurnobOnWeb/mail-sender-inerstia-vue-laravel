@@ -5,8 +5,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecipentsController;
 use App\Http\Controllers\RecipientsCSVDATA;
 use App\Http\Controllers\SendMails;
-use App\Models\Recipents;
-use App\Notifications\RecipientsMail;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -63,7 +61,7 @@ Route::middleware('auth')->group(function () {
     // })->name('sendmail');
 
 
-    // Route::post('/recipients/csvimport/{csv}', [RecipientsCSVDATA::class, 'store'])->name('recipients.csvimport');
+    Route::post('/csvimport', [RecipientsCSVDATA::class, 'store'])->name('recipients.csv');
     // Route::post('/upload', [RecipientsCSVDATA::class, 'upload'])->name('recipients.upload.file');
 });
 
