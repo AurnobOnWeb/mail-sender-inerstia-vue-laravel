@@ -12,10 +12,10 @@ const props = defineProps({
 </script>
 <template>
     <AdminLayout>
-        <Head title="Recipients"></Head>
-        <ContentHeade label="Recipients">
+        <Head title="Send Mails"></Head>
+        <ContentHeade label="Send Mails">
             <BreadCumbs>
-                <BreadCumbsLinks label="Recipients" :href="route('send.mail')">
+                <BreadCumbsLinks label="Send Mails" :href="route('send.mail')">
                 </BreadCumbsLinks>
             </BreadCumbs>
         </ContentHeade>

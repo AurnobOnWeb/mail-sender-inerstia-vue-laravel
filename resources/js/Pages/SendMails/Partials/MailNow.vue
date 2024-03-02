@@ -41,11 +41,14 @@
             </div>
 
             <div class="mt-6">
-                <ckeditor
-                    :editor="editor"
-                    v-model="form.mail_body"
-                    :config="editorConfig"
-                ></ckeditor>
+                <QuillEditor
+                    theme="snow"
+                    :modules="modules"
+                    toolbar="full"
+                    v-model:content="form.mail_body"
+                    contentType="html"
+                />
+                <InputError :message="form.errors.mail_body" class="mt-2" />
             </div>
             <div class="mt-6 flex justify-end">
                 <PrimaryButton @click="closeModal" class="bg-red-600">
@@ -65,23 +68,10 @@
     >
 </template>
 
-<script>
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-
-export default {
-    name: "app",
-    data() {
-        return {
-            editor: ClassicEditor,
-            editorData: "<p>Content of the editor.</p>",
-            editorConfig: {
-                // The configuration of the editor.
-            },
-        };
-    },
-};
-</script>
 <script setup>
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
+
 import PrimaryButton from "@/Components/admin/PrimaryButton.vue";
 import InputError from "@/Components/InputError.vue";
 import Modal from "@/Components/admin/Modal.vue";

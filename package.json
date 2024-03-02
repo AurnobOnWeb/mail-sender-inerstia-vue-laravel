@@ -20,6 +20,8 @@
     "dependencies": {
         "@ckeditor/ckeditor5-build-classic": "^41.0.0",
         "@ckeditor/ckeditor5-vue": "^5.1.0",
+        "@vueup/vue-quill": "^1.2.0",
+        "quill-image-uploader": "^1.3.0",
         "vue3-toastify": "^0.2.1"
     }
 }
